@@ -7,6 +7,9 @@ const profileRoutes = require("./routes/profileRoutes");
 const authRoutes = require("./routes/authRoutes");
 const aboutRoutes = require("./routes/aboutRoutes");
 
+
+
+
 const app = express();
 dotenv.config();
 
@@ -36,3 +39,4 @@ app.use((req, res) => {
   res.render("404", { title: "Sayfa Bulunamadı" });
   res.status(404);
 });
+
