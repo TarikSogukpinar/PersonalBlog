@@ -5,6 +5,7 @@ const indexRoutes = require("./routes/indexRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const authRoutes = require("./routes/authRoutes");
+const aboutRoutes = require("./routes/aboutRoutes");
 
 const app = express();
 dotenv.config();
@@ -28,6 +29,8 @@ app.use("/", authRoutes);
 app.use("/contact", contactRoutes);
 
 app.use("/profile", profileRoutes);
+
+app.use("/about", aboutRoutes);
 
 app.use((req, res) => {
   res.render("404", { title: "Sayfa Bulunamadı" });
