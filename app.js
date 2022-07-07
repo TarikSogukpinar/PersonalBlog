@@ -1,5 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const connectDatabase = require('./helpers/connectDatabase');
 const dotenv = require("dotenv");
 const indexRoutes = require("./routes/indexRoutes");
 const contactRoutes = require("./routes/contactRoutes");
@@ -7,11 +8,10 @@ const profileRoutes = require("./routes/profileRoutes");
 const authRoutes = require("./routes/authRoutes");
 const aboutRoutes = require("./routes/aboutRoutes");
 
-
-
-
 const app = express();
 dotenv.config();
+
+connectDatabase();
 
 app.set("view engine", "ejs");
 
@@ -39,4 +39,3 @@ app.use((req, res) => {
   res.render("404", { title: "Sayfa Bulunamadı" });
   res.status(404);
 });
-
