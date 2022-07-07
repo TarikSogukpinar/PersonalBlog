@@ -6,10 +6,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    minlength: 3,
+    maxlength: 30,
   },
   password: {
     type: String,
     required: true,
+    maxlength: 30,
+    minlength: 6,
   },
   email: {
     type: String,
@@ -19,6 +23,16 @@ const userSchema = new mongoose.Schema({
       /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
       "Please provide valid email",
     ],
+    maxlength: 30,
+    minlength: 6,
+  },
+  github: {
+    type: String,
+    maxlength: 30,
+  },
+  linkedin: {
+    type: String,
+    maxlength: 30,
   },
   createdAt: {
     type: Date,
@@ -31,8 +45,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.login = async function (username, password) {
-  const user = await this.findOne({ username });
+userSchema.statics.login = async function (email, password) {
+  const user = await this.findOne({ email });
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {

@@ -7,6 +7,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const authRoutes = require("./routes/authRoutes");
 const aboutRoutes = require("./routes/aboutRoutes");
+const {requireAuth, checkUser} = require('./middlewares/authMiddleware');
 
 const app = express();
 dotenv.config();
@@ -25,13 +26,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
+app.get("*", checkUser);
+
 app.use("/", indexRoutes);
 
 app.use("/", authRoutes);
 
 app.use("/contact", contactRoutes);
 
-app.use("/profile", profileRoutes);
+app.use("/profile", requireAuth, profileRoutes);
 
 app.use("/about", aboutRoutes);
 
